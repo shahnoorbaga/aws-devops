@@ -1,8 +1,8 @@
 version: 0.0
 os: linux	
 files:	
-  - source: /jewellery_management 
-    destination: /odoo-custom-addons/    
+  - source: jewellery_management 
+    destination: odoo-custom-addons/    
 hooks:	
   BeforeInstall:	 
     - location: scripts/install_dependencies	   
