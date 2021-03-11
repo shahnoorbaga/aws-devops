@@ -1,3 +1,4 @@
 #!/bin/bash
 sudo systemctl restart odoo14
+sudo su - odoo
 
