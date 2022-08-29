@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - apt-get install -y unzip
-      - scripts/odoo_14.sh
+      - sudo scripts/odoo_14.sh
 
   build:
     commands:
