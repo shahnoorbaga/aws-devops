@@ -8,8 +8,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - wget https://nightly.odoo.com/14.0/nightly/src/odoo_14.0.latest.zip
-      - unzip odoo_14.0.latest.zip -d /opt/odoo14
+      #- wget https://nightly.odoo.com/14.0/nightly/src/odoo_14.0.latest.zip
+      #- unzip odoo_14.0.latest.zip -d /opt/odoo14
    
 artifacts:
   type: 
