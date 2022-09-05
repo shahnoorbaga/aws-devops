@@ -3,12 +3,14 @@ version: 0.2
 phases:
   install:
     commands:
+      - pip3 install pycodestyle
 
   build:
     commands:
       - echo Build started on `date`
-      #- wget https://nightly.odoo.com/14.0/nightly/src/odoo_14.0.latest.zip
-      #- unzip odoo_14.0.latest.zip -d /opt/odoo14
+      - find . -name \*.py -exec pycodestyle --ignore=E402 {} +
+      
+      
    
 artifacts:
   type: 
