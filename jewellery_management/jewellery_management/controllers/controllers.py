@@ -7,14 +7,17 @@
 #     def index(self, **kw):
 #         return "Hello, world"
 
-#     @http.route('/jewellery_management/jewellery_management/objects/', auth='public')
+#     @http.route('/jewellery_management/jewellery_management/objects/', 
+                  auth='public')
 #     def list(self, **kw):
 #         return http.request.render('jewellery_management.listing', {
 #             'root': '/jewellery_management/jewellery_management',
-#             'objects': http.request.env['jewellery_management.jewellery_management'].search([]),
+#             'objects': http.request.env[
+                              'jewellery_management.jewellery_management'].search([]),
 #         })
 
-#     @http.route('/jewellery_management/jewellery_management/objects/<model("jewellery_management.jewellery_management"):obj>/', auth='public')
+#     @http.route('/jewellery_management/jewellery_management/objects/<model(
+                  "jewellery_management.jewellery_management"):obj>/', auth='public')
 #     def object(self, obj, **kw):
 #         return http.request.render('jewellery_management.object', {
 #             'object': obj
