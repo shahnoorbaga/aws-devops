@@ -2,8 +2,6 @@
 from docutils import io
 
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError
-from odoo.tools.misc import xlwt
 
 
 class JewelleryManagement(models.Model):
@@ -11,7 +9,7 @@ class JewelleryManagement(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Jewellery Management System'
 
-    jewel_type= [
+    jewel_type = [
         ('antique', 'Antique Jewellery'),
         ('temple', 'Temple Jewellery'),
         ('bead', 'Bead Jewellery'),
@@ -25,7 +23,7 @@ class JewelleryManagement(models.Model):
         ('navratna', 'Navratna Jewellery'),
 
     ]
-    jewellery_state_id= fields.Many2one('jewellery.state', string="states", default=1)
+    jewellery_state_id = fields.Many2one('jewellery.state', string="states", default=1)
     name = fields.Char(string="Partner Name")
     street = fields.Char('Street 1')
     street2 = fields.Char('Street 2')
@@ -40,6 +38,7 @@ class JewelleryManagement(models.Model):
     sale_ids = fields.Many2many('sale.order', string='Transfers')
     sale_count = fields.Integer(string="Sale Count", compute='_compute_sale_ids')
     partner_id = fields.Many2one('res.partner', string="Partner Id")
+
     # sale_order_ids = fields.Many2many('sale.order', string="Sale Order Id")
 
     def show_sales(self):
@@ -47,7 +46,7 @@ class JewelleryManagement(models.Model):
 
         vals = {
             'name': 'Sale Order jewellery',
-            'domain': [('is_jewel', '=', True),('jewel_id','=',self.id)],
+            'domain': [('is_jewel', '=', True), ('jewel_id', '=', self.id)],
             'view_type': 'form',
             'res_model': 'sale.order',
             'view_mode': 'tree,form',
@@ -59,7 +58,7 @@ class JewelleryManagement(models.Model):
     @api.depends('sale_ids')
     def _compute_sale_ids(self):
         for order in self:
-            order.sale_count = len(self.env['sale.order'].search([('jewel_id','=',order.id)]))
+            order.sale_count = len(self.env['sale.order'].search([('jewel_id', '=', order.id)]))
 
     @api.model
     def create(self, vals_list):
@@ -112,7 +111,8 @@ class JewelleryManagement(models.Model):
     #     domain += [('date_from', '>=', current_date), (current_date, '<=', self.date_to)]
     #     # used to create a domain to filter based on the start & end date#
     #     res = self.env['model.model'].search(domain)
-    #     # created an environment in a variable for the model from which we need to filter the data based on the domain#
+    #     # created an environment in a variable for the model from which we need to
+    #     filter the data based on the domain#
     #     docargs = []
     #     docargs.append(
     #         {'key': value}
@@ -120,7 +120,8 @@ class JewelleryManagement(models.Model):
     #
     # def print_report_xls(self):
     #     workbook = xlwt.Workbook()
-    #     # Header_style = format_common.font_style(position='center', bold=1, fontos='black',font_height=220, color='grey')
+    #     # Header_style = format_common.font_style(position='center', bold=1,
+    #     fontos='black',font_height=220, color='grey')
     #     sheet = workbook.add_sheet('Jewellery sale Report')
     #     sheet.row(3).height = 256 * 2
     #     sheet.write_merge(3, 3, 0, 11, u'Jewellery sale Report')
@@ -135,15 +136,3 @@ class JewelleryManagement(models.Model):
     #     workbook.save(stream)
     #     Classname('report.module_name.report_name.xlsx', 'model_name')
     #     return self.env.ref('module name.report_action').report_action(self)
-
-
-
-
-
-
-
-
-
-
-
-
