@@ -10,7 +10,8 @@ class JewelleryLine(models.Model):
     # def _get_default_currency_id(self):
     #     return self.env.company.currency_id.id
 
-    jewellery_sale_id = fields.Many2one('jewellery.management', string="Jewellery Sale Id")
+    jewellery_sale_id = fields.Many2one('jewellery.management',
+                                        string="Jewellery Sale Id")
     name = fields.Char(string='Name')
     product_id = fields.Many2one('product.product', string="Product Id",
                                  domain="[('is_jewellery', '=', True)]")
@@ -19,7 +20,8 @@ class JewelleryLine(models.Model):
     # image = fields.Binary(string='Image')
     unit_price = fields.Monetary(string='Unit Price')
     currency_id = fields.Many2one('res.currency', 'Currency',
-                                  default=lambda self: self.env.company.currency_id.id)
+                                  default=lambda self: self.env.
+                                  company.currency_id.id)
     display_type = fields.Selection([
         ('line_section', "Section"),
         ('line_note', "Note")], help="Technical field for UX purpose.")

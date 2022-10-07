@@ -23,7 +23,8 @@ class JewelleryManagement(models.Model):
         ('navratna', 'Navratna Jewellery'),
 
     ]
-    jewellery_state_id = fields.Many2one('jewellery.state', string="states", default=1)
+    jewellery_state_id = fields.Many2one('jewellery.state',
+                                         string="states", default=1)
     name = fields.Char(string="Partner Name")
     street = fields.Char('Street 1')
     street2 = fields.Char('Street 2')
@@ -31,10 +32,12 @@ class JewelleryManagement(models.Model):
     country_id = fields.Many2one('res.country', string='Country')
     state_id = fields.Many2one('res.country.state', string='State')
     payment_term = fields.Text(string="Payment Terms")
-    order_date = fields.Date(string="Order date", default=fields.Date.today)
+    order_date = fields.Date(string="Order date",
+                             default=fields.Date.today)
     sale_order_ref = fields.Char(string="Sale Order Reference")
     jewellery_type = fields.Selection(jewel_type, default='antique')
-    jewellery_line_ids = fields.One2many('jewellery.line', 'name', string="Jewellery Order Line")
+    jewellery_line_ids = fields.One2many('jewellery.line', 'name',
+                                         string="Jewellery Order Line")
     sale_ids = fields.Many2many('sale.order', string='Transfers')
     sale_count = fields.Integer(string="Sale Count", compute='_compute_sale_ids')
     partner_id = fields.Many2one('res.partner', string="Partner Id")
@@ -58,7 +61,8 @@ class JewelleryManagement(models.Model):
     @api.depends('sale_ids')
     def _compute_sale_ids(self):
         for order in self:
-            order.sale_count = len(self.env['sale.order'].search([('jewel_id', '=', order.id)]))
+            order.sale_count = len(self.env['sale.order']
+                                   .search([('jewel_id', '=', order.id)]))
 
     @api.model
     def create(self, vals_list):
@@ -108,10 +112,12 @@ class JewelleryManagement(models.Model):
     #     current_date = fields.Date.today()
     #     # used to get today’s date#
     #     domain = []
-    #     domain += [('date_from', '>=', current_date), (current_date, '<=', self.date_to)]
+    #     domain += [('date_from', '>=', current_date),
+    #     (current_date, '<=', self.date_to)]
     #     # used to create a domain to filter based on the start & end date#
     #     res = self.env['model.model'].search(domain)
-    #     # created an environment in a variable for the model from which we need to
+    #     # created an environment in a variable
+    #     for the model from which we need to
     #     filter the data based on the domain#
     #     docargs = []
     #     docargs.append(
@@ -128,8 +134,10 @@ class JewelleryManagement(models.Model):
     #     data = self._get_data()
     #     row = 8
     #     for h in data:
-    #         sheet.write_merge(row, row, 0, 0, h.get().date_from.strftime('%d/%B/%Y'), values)
-    #         sheet.write_merge(row, row, 1, 1, h.get().date_to.strftime('%d/%B/%Y'), values)
+    #         sheet.write_merge(row, row, 0, 0, h.get().
+    #         date_from.strftime('%d/%B/%Y'), values)
+    #         sheet.write_merge(row, row, 1, 1, h.get().
+    #         date_to.strftime('%d/%B/%Y'), values)
     #         row += 1
     #
     #     stream = io.BytesIO()
